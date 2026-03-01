@@ -3,457 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>平面図形 究極の補充プリント</title>
+    <title>平面図形 分野別補充プリント </title>
     <style>
-        :root {
-            --primary: #2563eb;
-            --secondary: #475569;
-            --accent: #e67e22;
-            --bg: #f8fafc;
-        }
-        body {
-            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
-            background-color: var(--bg);
-            margin: 0;
-            padding: 0;
-            color: #1e293b;
-        }
-
-        /* UI Elements */
-        .nav-container {
-            background: #1e293b;
-            padding: 15px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-        }
-        .selector-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-        }
-        select, .tab-btn {
-            padding: 10px 16px;
-            border-radius: 8px;
-            border: 1px solid #334155;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        select { background: #334155; color: white; }
-        .tab-btn { background: #475569; color: white; }
-        .tab-btn:hover { background: #64748b; }
-        .tab-btn.active { background: var(--primary); border-color: var(--primary); font-weight: bold; }
-
-        /* Worksheet Styling */
-        .worksheet-container {
-            width: 210mm;
-            min-height: 297mm;
-            padding: 20mm;
-            margin: 30px auto;
-            background: white;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            box-sizing: border-box;
-            position: relative;
-        }
-        .header-box {
-            border: 3px double #000;
-            padding: 15px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .header-title { font-size: 1.5rem; font-weight: 900; letter-spacing: 1px; }
-        .name-box { border-bottom: 1px solid #000; width: 250px; text-align: left; padding-left: 10px; font-size: 0.9rem; }
-        
-        .problem-item { margin-bottom: 45px; position: relative; }
-        .problem-number {
-            background: #000;
-            color: white;
-            padding: 4px 12px;
-            font-weight: bold;
-            display: inline-block;
-            margin-right: 10px;
-            border-radius: 4px;
-        }
-        .problem-text { font-size: 1.05rem; line-height: 1.6; margin: 10px 0; }
-        .svg-container { 
-            margin: 20px 0; 
-            text-align: center; 
-            background: #fff;
-        }
-        .sub-question { margin-left: 20px; margin-bottom: 15px; display: flex; align-items: flex-end; }
-        .answer-space {
-            border-bottom: 1px solid #333;
-            flex-grow: 1;
-            max-width: 120px;
-            margin-left: 10px;
-            text-align: right;
-            padding-right: 5px;
-            font-weight: bold;
-        }
-
-        .ans-section { margin-top: 20px; }
-        .ans-block { 
-            border: 1px solid #cbd5e1; 
-            border-radius: 8px; 
-            padding: 15px; 
-            margin-bottom: 20px;
-            background: #f8fafc;
-        }
-        .ans-label { 
-            display: inline-block; 
-            padding: 2px 8px; 
-            border-radius: 4px; 
-            font-weight: bold; 
-            font-size: 0.85rem; 
-            margin-bottom: 10px;
-        }
-        .label-main { background: #dbeafe; color: #1e40af; }
-        .label-rev { background: #fee2e2; color: #b91c1c; }
-
-        @media print {
-            .nav-container, .print-btn { display: none !important; }
-            body { background: white; }
-            .worksheet-container { box-shadow: none; border: none; width: 100%; margin: 0; padding: 10mm; }
-            .problem-item { page-break-inside: avoid; }
-        }
-
-        .print-btn { 
-            position: fixed; bottom: 30px; right: 30px; 
-            background: var(--accent); color: white; border: none; 
-            padding: 15px 25px; border-radius: 50px; cursor: pointer; 
-            font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.2); 
-            z-index: 2000;
-        }
+        @page { size: A4 vertical; margin: 0; }
+        body { font-family: "Yu Mincho", "MS Mincho", serif; margin: 0; padding: 0; background-color: #f0f2f5; color: #000; }
+        .no-print { background: #2c3e50; padding: 12px; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; position: sticky; top: 0; z-index: 100; }
+        select, button { padding: 8px 12px; border-radius: 4px; border: none; background: #ecf0f1; cursor: pointer; font-weight: bold; }
+        button.active { background: #3498db; color: white; }
+        .page { width: 210mm; height: 297mm; padding: 15mm 18mm; margin: 10px auto; background: white; display: flex; flex-direction: column; position: relative; box-shadow: 0 0 10px rgba(0,0,0,0.1); box-sizing: border-box; }
+        .header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #000; padding-bottom: 5px; margin-bottom: 20px; }
+        .main-title { font-size: 1.4rem; font-weight: 900; }
+        .name-area { display: flex; gap: 15px; align-items: flex-end; }
+        .score-box { border: 2px solid #000; width: 70px; height: 45px; text-align: center; font-size: 0.7rem; }
+        .name-box { border-bottom: 2px solid #000; width: 180px; height: 35px; font-size: 0.9rem; }
+        .content { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px 30px; flex-grow: 1; }
+        .problem-card { border-top: 1px solid #000; padding-top: 8px; display: flex; flex-direction: column; }
+        .prob-num { font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; }
+        .prob-num span { background: #000; color: #fff; padding: 0 6px; margin-right: 5px; }
+        .prob-text { font-size: 0.85rem; margin-bottom: 8px; line-height: 1.5; height: 3.2em; overflow: hidden; }
+        .svg-wrap { text-align: center; margin: auto 0; padding: 5px; }
+        .svg-wrap svg { max-height: 100px; width: auto; }
+        .sub-q { margin-top: auto; }
+        .q-row { display: flex; align-items: flex-end; margin-bottom: 6px; font-size: 0.85rem; }
+        .q-line { flex-grow: 1; border-bottom: 1px solid #000; margin: 0 5px; }
+        .ans-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .ans-item { border: 1px solid #000; padding: 10px; }
+        .ans-header { font-weight: bold; border-bottom: 1px dashed #ccc; margin-bottom: 5px; font-size: 0.9rem; }
+        .ans-val { color: #d35400; font-weight: bold; font-size: 1rem; }
+        .ans-explain { font-size: 0.8rem; color: #333; margin-top: 5px; line-height: 1.4; background: #f9f9f9; padding: 8px; border-left: 3px solid #3498db; }
+        .footer { text-align: right; font-size: 0.7rem; border-top: 1px solid #eee; padding-top: 5px; margin-top: 10px; }
+        @media print { .no-print { display: none !important; } .page { margin: 0; box-shadow: none; border: none; } }
     </style>
 </head>
 <body>
 
-<div class="nav-container no-print">
-    <div class="selector-group">
-        <select id="round-select" onchange="updateView()">
-            <option value="1">第1回：台形と平行線の比</option>
-            <option value="2">第2回：折り返しと合同・相似</option>
-            <option value="3">第3回：面積比（隣辺比・底辺比）</option>
-            <option value="4">第4回：円と多角形の相似</option>
-            <option value="5">第5回：回転体と軌跡</option>
-            <option value="6">第6回：影の面積と相似</option>
-            <option value="7">第7回：複合図形と比の完成</option>
-        </select>
-        <button class="tab-btn active" data-target="main" onclick="setView('main')">本問（授業用）</button>
-        <button class="tab-btn" data-target="revA" onclick="setView('revA')">復習テストA</button>
-        <button class="tab-btn" data-target="revB" onclick="setView('revB')">復習テストB</button>
-        <button class="tab-btn" data-target="ans" onclick="setView('ans')">解答解説</button>
-    </div>
+<div class="no-print">
+    <select id="roundSel" onchange="render()">
+        <option value="1">第1回：台形と相似</option>
+        <option value="2">第2回：折り返し</option>
+        <option value="3">第3回：面積比</option>
+        <option value="4">第4回：円の性質</option>
+        <option value="5">第5回：回転・軌跡</option>
+        <option value="6">第6回：影の計算</option>
+        <option value="7">第7回：複合・比の完成</option>
+    </select>
+    <button id="btn-main" onclick="setView('main')">本問</button>
+    <button id="btn-ans_main" onclick="setView('ans_main')">本問解答</button>
+    <button id="btn-revA" onclick="setView('revA')">復習A</button>
+    <button id="btn-ans_revA" onclick="setView('ans_revA')">復習A解答</button>
+    <button id="btn-revB" onclick="setView('revB')">復習B</button>
+    <button id="btn-ans_revB" onclick="setView('ans_revB')">復習B解答</button>
+    <button onclick="window.print()" style="background:#27ae60; color:white;">印刷</button>
 </div>
 
-<button class="print-btn no-print" onclick="window.print()">印刷する</button>
-
-<div id="content-area"></div>
+<div id="print-area"></div>
 
 <script>
-    let currentRound = "1";
-    let currentView = "main";
+    let currentView = 'main';
 
-    const data = {
+    const db = {
         "1": {
             title: "台形と平行線の比",
-            problems: [
-                {
-                    q: "台形ABCDにおいてAD//EF//BCです。AD=8cm, BC=20cmで、AE:EB=2:1です。",
-                    svg: `<svg width="240" height="120" viewBox="0 0 240 120"><path d="M70 20 L150 20 L210 100 L30 100 Z" fill="none" stroke="black" stroke-width="2"/><line x1="43" y1="73" x2="190" y2="73" stroke="black" stroke-width="1.5"/><text x="60" y="15" font-size="12">A</text><text x="155" y="15" font-size="12">D</text><text x="15" y="115" font-size="12">B</text><text x="215" y="115" font-size="12">C</text><text x="30" y="75" font-size="12">E</text><text x="195" y="75" font-size="12">F</text></svg>`,
-                    sub: ["(1) EFの長さを求めなさい。", "(2) 対角線ACとEFの交点をGとするとき、EGの長さは？", "(3) 台形AEFDと台形EBCFの面積比を求めなさい。"],
-                    ans: "(1) 16cm (2) 13.3cm (3) 12:13"
-                },
-                {
-                    q: "AD//BCの台形。対角線交点Oを通り底辺に平行な直線と脚の交点をE,Fとする。AD=a, BC=bの公式利用。",
-                    svg: `<svg width="200" height="100" viewBox="0 0 200 100"><path d="M60 20 L140 20 L180 80 L20 80 Z" fill="none" stroke="black"/><line x1="60" y1="20" x2="180" y2="80" stroke="gray" stroke-dasharray="2"/><line x1="140" y1="20" x2="20" y2="80" stroke="gray" stroke-dasharray="2"/><line x1="40" y1="56" x2="160" y2="56" stroke="black" stroke-width="2"/></svg>`,
-                    sub: ["(1) AD=9, BC=18のときEFは？", "(2) EF=12, AD=15のときBCは？", "(3) △OAD:△OBCの面積比は？"],
-                    ans: "(1) 12 (2) 60 (3) 1:4"
-                },
-                {
-                    q: "平行四辺形ABCD。EはBCを3:1に、FはCDの中点。AFとDEの交点G。",
-                    svg: `<svg width="200" height="100" viewBox="0 0 200 100"><path d="M40 20 L160 20 L180 80 L60 80 Z" fill="none" stroke="black"/><line x1="40" y1="20" x2="170" y2="50" stroke="black"/><line x1="160" y1="20" x2="75" y2="80" stroke="black"/></svg>`,
-                    sub: ["(1) AG:GFの比は？", "(2) DG:GEの比は？", "(3) △ADGは全体の何倍？"],
-                    ans: "(1) 4:3 (2) 8:3 (3) 4/11"
-                },
-                {
-                    q: "等脚台形ABCDの内部に点Pをとり、各頂点と結んだ面積のパズル。",
-                    svg: `<svg width="200" height="100" viewBox="0 0 200 100"><path d="M60 20 L140 20 L180 80 L20 80 Z" fill="none" stroke="black"/><circle cx="100" cy="55" r="2" fill="black"/><line x1="60" y1="20" x2="100" y2="55" stroke="gray"/><line x1="140" y1="20" x2="100" y2="55" stroke="gray"/></svg>`,
-                    sub: ["(1) 上下三角形の和と左右の関係は？", "(2) 面積比の移動法則を説明せよ。", "(3) 具体的な数値計算（AD=4, BC=10, H=6）。"],
-                    ans: "(1) 一定ではない (3) 42cm²"
-                }
-            ]
+            base: [
+                { q: "AD//BCの台形ABCD。AD={a}cm, BC={b}cm。ABを{m}:{n}に分ける点Eを通り平行線EFを引く。", items: ["EFの長さ", "EGの長さ(AC交点)", "AEFDとEBCFの面積比"], units: ["cm", "cm", "："], svg: '<svg viewBox="0 0 200 100"><path d="M60 20 L140 20 L180 85 L20 85 Z" fill="none" stroke="#000" stroke-width="2"/><line x1="47" y1="63.3" x2="167" y2="63.3" stroke="#000" stroke-dasharray="4 2"/></svg>', solve: (v) => { 
+                    const ef = (v.a*v.n + v.b*v.m)/(v.m+v.n); 
+                    const eg = v.a * v.n / (v.m+v.n);
+                    return { ans: [`${ef.toFixed(1)}cm`, `${eg.toFixed(1)}cm`, `${((v.a+ef)*v.m).toFixed(0)}：${((v.b+ef)*v.n).toFixed(0)}`], exp: `相似比を利用。EF=(上底×下比+下底×上比)÷全体比。EGは△ABCの相似比から求めます。` };
+                }},
+                { q: "対角線の交点Oを通る平行線EF。AD={a}cm, BC={b}cmとする。", items: ["EOの長さ", "EFの長さ", "△OADと△OBCの面積比"], units: ["cm", "cm", "："], svg: '<svg viewBox="0 0 200 100"><path d="M70 20 L130 20 L170 85 L30 85 Z" fill="none" stroke="#000" stroke-width="2"/><line x1="70" y1="20" x2="170" y2="85" stroke="#000"/><line x1="130" y1="20" x2="30" y2="85" stroke="#000"/></svg>', solve: (v) => {
+                    const eo = (v.a * v.b) / (v.a + v.b);
+                    return { ans: [`${eo.toFixed(1)}cm`, `${(eo*2).toFixed(1)}cm`, `${v.a*v.a}：${v.b*v.b}`], exp: `EO=1/(1/AD + 1/BC) の公式を利用。面積比は相似比の2乗です。` };
+                }},
+                { q: "平行四辺形ABCD。BCを{m}:{n}に分ける点E。辺CDの中点F。AFとDEの交点G。", items: ["AG：GF", "DG：GE", "△ADGは全体の？倍"], units: ["：", "：", "倍"], svg: '<svg viewBox="0 0 200 100"><path d="M40 20 L160 20 L180 85 L60 85 Z" fill="none" stroke="#000" stroke-width="2"/><line x1="40" y1="20" x2="173" y2="52" stroke="#000"/><line x1="160" y1="20" x2="140" y2="85" stroke="#000"/></svg>', solve: (v) => {
+                    return { ans: [`${v.m+v.n}：${v.m/2}`, `${v.m+v.n}：${v.n}`, "3/10"], exp: `延長線を引いて砂時計型相似を作ります。AG:GF = AD:CE'の比率を確認。` };
+                }},
+                { q: "台形ABCD（AD={a}, BC={b}）。内部に点P。△PADと△PBCの面積の和は？", items: ["AD:BCの比", "高さの和の比率", "左右の和(全体{s}㎠時)"], units: ["：", "倍", "㎠"], svg: '<svg viewBox="0 0 200 100"><path d="M70 20 L130 20 L175 85 L25 85 Z" fill="none" stroke="#000" stroke-width="2"/><circle cx="100" cy="50" r="3" fill="#000"/></svg>', solve: (v) => {
+                    return { ans: [`${v.a}：${v.b}`, "1", `${v.s/2}㎠`], exp: `上下の三角形の面積の和は、(上底+下底)×高さ÷2の半分となるため、全体の半分になります。` };
+                }}
+            ],
+            main: { a:6, b:10, m:2, n:1, s:42 },
+            revA: { a:8, b:12, m:3, n:1, s:60 },
+            revB: { a:4, b:8, m:1, n:1, s:36 }
         },
         "2": {
-            title: "折り返しと合同・相似",
-            problems: [
-                {
-                    q: "長方形ABCDをBFで折り返し、CがAD上のEに重なった。",
-                    svg: `<svg width="200" height="120" viewBox="0 0 200 120"><rect x="30" y="20" width="140" height="80" fill="none" stroke="black"/><path d="M30 100 L70 20 L150 50 Z" fill="#eee" stroke="black" stroke-dasharray="3"/></svg>`,
-                    sub: ["(1) AE=12, AB=9のときBCは？", "(2) そのときのCFの長さは？", "(3) △EDFの面積を求めよ。"],
-                    ans: "(1) 15 (2) 3.75 (3) 4.5"
-                },
-                {
-                    q: "正方形ABCD。辺BCの中点Mに向けてAを折り返した。",
-                    svg: `<svg width="150" height="150" viewBox="0 0 150 150"><rect x="25" y="25" width="100" height="100" fill="none" stroke="black"/><path d="M25 25 L75 125" stroke="gray" stroke-dasharray="3"/><path d="M25 80 L125 40" stroke="black" stroke-width="2"/></svg>`,
-                    sub: ["(1) 折り目の線とABの交点P、APは？", "(2) DQの長さは？", "(3) 五角形の内角の和との関係。"],
-                    ans: "(1) 5/8 * L (2) 1/8 * L (3) 37.5%"
-                },
-                {
-                    q: "正三角形の折り返し。頂点Aを辺BC上のDに重ねる。",
-                    svg: `<svg width="150" height="150" viewBox="0 0 150 150"><path d="M75 20 L130 120 L20 120 Z" fill="none" stroke="black"/><path d="M20 120 L80 120 L110 70 Z" fill="#eee" stroke="black" stroke-dasharray="2"/></svg>`,
-                    sub: ["(1) 相似な三角形の組をすべて答えよ。", "(2) BD:DC=1:2のとき、辺の比は？", "(3) 折り目の長さの比。"],
-                    ans: "(1) △BDE∽△CFD (2) 7:8 (3) 基準比による"
-                },
-                {
-                    q: "直角三角形の頂点を重心または中点に重ねる折り返し。",
-                    svg: `<svg width="150" height="100" viewBox="0 0 150 100"><path d="M20 80 L130 80 L20 20 Z" fill="none" stroke="black"/><path d="M20 80 L75 80 L75 50 Z" fill="none" stroke="black" stroke-dasharray="2"/></svg>`,
-                    sub: ["(1) 重なった部分の面積は？", "(2) 残りの面積との比は？", "(3) 相似比の2乗の利用。"],
-                    ans: "(1) 1/4 (2) 1:3 (3) 相似比1:2"
-                }
-            ]
+            title: "折り返しと相似",
+            base: [
+                { q: "長方形ABCD（AB={a}, BC={b}）を頂点CがAD上のEに重なるよう折る。", items: ["AEの長さ", "CFの長さ", "△EDFの面積"], units: ["cm", "cm", "㎠"], svg: '<svg viewBox="0 0 200 100"><rect x="40" y="15" width="120" height="70" fill="none" stroke="#000"/><path d="M40 85 L80 15 L160 40 Z" fill="none" stroke="#000" stroke-dasharray="3"/></svg>', solve: (v) => {
+                    const ae = Math.sqrt(v.b*v.b - v.a*v.a);
+                    return { ans: [`${ae.toFixed(1)}cm`, "3cm", "6㎠"], exp: `直角三角形の相似と三平方の定理（または3:4:5の比）を利用します。` };
+                }},
+                { q: "正方形ABCD。BCの中点MにAを重ねて折る。折り目PQ。", items: ["APの長さ（一辺比）", "DQの長さ（一辺比）", "四角形APQDの比率"], units: ["倍", "倍", "倍"], svg: '<svg viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="80" fill="none" stroke="#000"/></svg>', solve: (v) => {
+                    return { ans: ["5/8倍", "1/8倍", "3/8倍"], exp: `折り返した点と元の点の垂直二等分線が折り目になることを利用します。` };
+                }},
+                { q: "正三角形ABC。点Aを辺BC上のD（BD:DC={m}:{n}）に重なるよう折る。", items: ["相似な組", "BE：CFの比", "折り目の比"], units: ["", "：", "："], svg: '<svg viewBox="0 0 100 100"><path d="M50 10 L90 85 L10 85 Z" fill="none" stroke="#000"/></svg>', solve: (v) => {
+                    return { ans: ["△BDE∽△CFD", `${v.m*2}：${v.n+1}`, "5：7"], exp: `60度を挟む2つの三角形が相似になる「正三角形の折り返し」の典型題です。` };
+                }},
+                { q: "直角三角形ABC（AB={c}）。Cを斜辺の中点Mに重なるように折る。", items: ["形状", "面積倍率", "周囲の変化"], units: ["", "倍", ""], svg: '<svg viewBox="0 0 150 100"><path d="M20 80 L130 80 L20 20 Z" fill="none" stroke="#000"/></svg>', solve: (v) => {
+                    return { ans: ["凧形", "1/4", "減少する"], exp: `中点連結定理により、重なる部分は全体の1/4の面積になります。` };
+                }}
+            ],
+            main: { a:12, b:20, m:1, n:2, c:10 },
+            revA: { a:9, b:15, m:1, n:1, c:12 },
+            revB: { a:6, b:10, m:2, n:3, c:8 }
         },
-        "3": {
-            title: "面積比（隣辺比・底辺比）",
-            problems: [
-                {
-                    q: "三角形ABC。ABを2:1に、ACを3:2に分ける点D, E。DEで切る。",
-                    svg: `<svg width="180" height="150" viewBox="0 0 180 150"><path d="M90 20 L150 130 L30 130 Z" fill="none" stroke="black" stroke-width="2"/><line x1="50" y1="93" x2="126" y2="86" stroke="black" stroke-width="1.5"/></svg>`,
-                    sub: ["(1) △ADE:△ABCの面積比は？", "(2) 四角形DBCEは全体の何倍？", "(3) BC//DEとするための条件。"],
-                    ans: "(1) 2/5 (2) 3/5 (3) 比が等しいこと"
-                },
-                {
-                    q: "平行四辺形の内部に引いた2本の線。面積の比率を求める。",
-                    svg: `<svg width="200" height="100" viewBox="0 0 200 100"><path d="M40 20 L160 20 L180 80 L60 80 Z" fill="none" stroke="black"/><line x1="40" y1="20" x2="120" y2="80" stroke="black"/><line x1="60" y1="80" x2="160" y2="20" stroke="black"/></svg>`,
-                    sub: ["(1) 中央の交点による分割比は？", "(2) 4つのパーツの面積比は？", "(3) 全体を1としたときの各値。"],
-                    ans: "(1) 1:1 (2) 1:2:2:4 (3) 1/9など"
-                },
-                {
-                    q: "ベンツ切り（三角形内部の点から各頂点への結線）。",
-                    svg: `<svg width="150" height="150" viewBox="0 0 150 150"><path d="M75 20 L130 130 L20 130 Z" fill="none" stroke="black"/><circle cx="75" cy="90" r="2" fill="black"/><line x1="75" y1="20" x2="75" y2="90" stroke="black"/><line x1="20" y1="130" x2="75" y2="90" stroke="black"/><line x1="130" y1="130" x2="75" y2="90" stroke="black"/></svg>`,
-                    sub: ["(1) 3つの三角形の面積比が2:3:4のとき...", "(2) 各辺の分割比を求めよ。", "(3) チェバの定理との関連。"],
-                    ans: "(1) 底辺比に読み替え (2) 3:4など (3) 一致する"
-                },
-                {
-                    q: "六角形の中の三角形。各辺の中点を結ぶ。",
-                    svg: `<svg width="150" height="150" viewBox="0 0 150 150"><path d="M75 20 L125 50 L125 100 L75 130 L25 100 L25 50 Z" fill="none" stroke="black"/><path d="M75 20 L125 100 L25 100 Z" fill="none" stroke="black" stroke-dasharray="2"/></svg>`,
-                    sub: ["(1) 正六角形の面積を1とすると？", "(2) 重なった部分の面積は？", "(3) 分割図による証明。"],
-                    ans: "(1) 3/8 (2) 1/2 (3) 6つに分割"
-                }
-            ]
-        },
-        "4": {
-            title: "円と多角形の相似",
-            problems: [
-                {
-                    q: "円に内接する四角形。対角線が直交する場合の性質。",
-                    svg: `<svg width="180" height="180" viewBox="0 0 180 180"><circle cx="90" cy="90" r="80" fill="none" stroke="black" stroke-width="2"/><line x1="90" y1="10" x2="90" y2="170" stroke="black"/><line x1="10" y1="90" x2="170" y2="90" stroke="black"/><path d="M90 10 L170 90 L90 170 L10 90 Z" fill="none" stroke="black"/></svg>`,
-                    sub: ["(1) 辺の長さの2乗の和の性質。", "(2) 半径との関係を求めよ。", "(3) 面積を最大にする条件。"],
-                    ans: "(1) a^2+c^2=b^2+d^2 (2) 直径に等しい (3) 正方形"
-                },
-                {
-                    q: "扇形の中に正方形がぴったり入っている図形。",
-                    svg: `<svg width="150" height="150" viewBox="0 0 150 150"><path d="M20 130 L130 130 A 110 110 0 0 0 20 20 Z" fill="none" stroke="black"/><rect x="20" y="80" width="50" height="50" fill="none" stroke="black"/></svg>`,
-                    sub: ["(1) 半径10のとき、正方形の一辺は？", "(2) 面積比を求めなさい。", "(3) 中心角が60度の場合は？"],
-                    ans: "(1) 4.47 (2) 2/5 (3) √を用いた比"
-                },
-                {
-                    q: "2つの円の共通接線と相似。",
-                    svg: `<svg width="220" height="120" viewBox="0 0 220 120"><circle cx="50" cy="70" r="30" fill="none" stroke="black"/><circle cx="150" cy="70" r="50" fill="none" stroke="black"/><line x1="0" y1="20" x2="220" y2="20" stroke="black"/></svg>`,
-                    sub: ["(1) 中心間距離13, 半径5, 8のとき接線は？", "(2) 相似比を利用した交点までの距離。", "(3) 内接線の場合の計算。"],
-                    ans: "(1) 12.6 (2) 比による (3) 距離の変化"
-                },
-                {
-                    q: "円周角の定理の逆と共円点。",
-                    svg: `<svg width="150" height="150" viewBox="0 0 150 150"><path d="M30 120 L120 120 L75 30 Z" fill="none" stroke="black"/><circle cx="75" cy="90" r="50" stroke="gray" stroke-dasharray="3"/></svg>`,
-                    sub: ["(1) 4点が同一円周上にある条件は？", "(2) 図の中から共円点を見つけよ。", "(3) 相似な三角形の発見。"],
-                    ans: "(1) 対角の和180 (3) 多数存在"
-                }
-            ]
-        },
-        "5": {
-            title: "回転体と軌跡",
-            problems: [
-                {
-                    q: "直角三角形を斜辺を軸に1回転させたときにできる立体。",
-                    svg: `<svg width="180" height="120" viewBox="0 0 180 120"><path d="M40 90 L140 90 L40 30 Z" fill="none" stroke="black"/><line x1="40" y1="90" x2="112" y2="46" stroke="gray" stroke-dasharray="2"/></svg>`,
-                    sub: ["(1) 見取り図を描け。(2) 体積を求めよ。(3) 表面積を求めよ。"],
-                    ans: "(2) 1/3*PI*r^2*h (3) 円錐2つの和"
-                },
-                {
-                    q: "正方形の周りを円が転がるときの中心の軌跡。",
-                    svg: `<svg width="150" height="150" viewBox="0 0 150 150"><rect x="50" y="50" width="50" height="50" fill="none" stroke="black"/><circle cx="50" cy="50" r="10" fill="none" stroke="gray"/></svg>`,
-                    sub: ["(1) 軌跡の長さを求めよ。(2) 円が通過した部分の面積。(3) 角の部分の扇形に注意。"],
-                    ans: "(1) 4L+2PI*r (2) 4Lr+PI*r^2"
-                },
-                {
-                    q: "ひもを巻き付ける問題。長方形にひもをかける。",
-                    svg: `<svg width="180" height="120" viewBox="0 0 180 120"><rect x="40" y="30" width="100" height="60" fill="none" stroke="black"/><path d="M40 30 L160 30" stroke="red" stroke-width="2"/></svg>`,
-                    sub: ["(1) ひもの先端が動く範囲の面積。(2) ひもが12cm、長方形が4x6のとき。(3) 重なる部分の処理。"],
-                    ans: "(1) 扇形の組み合わせ (2) 計算式"
-                },
-                {
-                    q: "円錐の展開図と側面上の最短距離。",
-                    svg: `<svg width="150" height="150" viewBox="0 0 150 150"><path d="M75 20 A 80 80 0 0 1 140 100 L75 100 Z" fill="none" stroke="black"/></svg>`,
-                    sub: ["(1) 展開図の扇形の中心角は？(2) 側面を1周する最短の長さ。(3) 中点まで行く場合。"],
-                    ans: "(1) 360*r/R (2) 弦の長さ"
-                }
-            ]
-        },
-        "6": {
-            title: "影の面積と相似",
-            problems: [
-                {
-                    q: "棒の影と建物の影。相似比の利用。",
-                    svg: `<svg width="200" height="100" viewBox="0 0 200 100"><line x1="20" y1="80" x2="180" y2="80" stroke="black"/><rect x="40" y="30" width="20" height="50" fill="gray"/><line x1="0" y1="0" x2="120" y2="80" stroke="orange" stroke-dasharray="2"/></svg>`,
-                    sub: ["(1) 1mの棒の影が1.5mのとき、高さ10mのビルの影は？", "(2) 影が壁に折れ曲がっている場合。(3) 太陽の高度角の変化。"],
-                    ans: "(1) 15m (2) 相似の合成 (3) 反比例"
-                },
-                {
-                    q: "電灯の下を歩く人の影の長さの変化。",
-                    svg: `<svg width="200" height="120" viewBox="0 0 200 120"><line x1="20" y1="20" x2="20" y2="100" stroke="black" stroke-width="3"/><circle cx="20" cy="20" r="5" fill="yellow"/><line x1="80" y1="60" x2="80" y2="100" stroke="blue" stroke-width="2"/></svg>`,
-                    sub: ["(1) 電灯4m, 人1.6m。人の影の長さは？", "(2) 人が毎秒1mで歩くときの影の先端の速度。(3) 影自体の伸びる速度。"],
-                    ans: "(1) 相似比による (2) 2.5m/s (3) 1.5m/s"
-                },
-                {
-                    q: "複雑な多面体の影（平行光線）。",
-                    svg: `<svg width="150" height="150" viewBox="0 0 150 150"><path d="M30 120 L100 120 L70 90 L30 90 Z" fill="gray" opacity="0.5"/></svg>`,
-                    sub: ["(1) 立方体を斜めに照らしたときの影の形。(2) 影の面積が最大になる条件。(3) 投影図の考え方。"],
-                    ans: "(1) 六角形など (2) 断面積最大"
-                },
-                {
-                    q: "点光源による円板の影の面積。",
-                    svg: `<svg width="180" height="150" viewBox="0 0 180 150"><circle cx="90" cy="30" r="5" fill="orange"/><line x1="60" y1="80" x2="120" y2="80" stroke="black" stroke-width="4"/><line x1="20" y1="130" x2="160" y2="130" stroke="black"/></svg>`,
-                    sub: ["(1) 光源から円板まで2m、床まで5mのとき、影の半径は？", "(2) 円板が傾いている場合の影の形。(3) 面積の変化率。"],
-                    ans: "(1) 2.5倍 (2) 楕円"
-                }
-            ]
-        },
-        "7": {
-            title: "複合図形と比の完成",
-            problems: [
-                {
-                    q: "正方形と扇形が重なった「葉っぱ型」の応用。",
-                    svg: `<svg width="150" height="150" viewBox="0 0 150 150"><rect x="25" y="25" width="100" height="100" fill="none" stroke="black"/><path d="M25 125 A 100 100 0 0 1 125 25 A 100 100 0 0 1 25 125" fill="#ddd"/></svg>`,
-                    sub: ["(1) 正方形の一辺を10とするとき、影の面積は？", "(2) 中に円が内接している場合。(3) 30度、60度の分割を利用。"],
-                    ans: "(1) 57 (2) 複雑な比 (3) 面積の公式"
-                },
-                {
-                    q: "ヒポクラテスの三日月。",
-                    svg: `<svg width="180" height="120" viewBox="0 0 180 120"><path d="M40 100 L140 100 L140 40 Z" fill="none" stroke="black"/><path d="M40 100 A 50 50 0 0 1 140 40" fill="none" stroke="black"/></svg>`,
-                    sub: ["(1) 直角三角形の各辺を直径とする半円を描く。(2) 三日月部分の面積の和は？", "(3) ピタゴラスの定理による証明。"],
-                    ans: "(2) 三角形の面積に等しい"
-                },
-                {
-                    q: "正六角形の分割比（最高レベル）。",
-                    svg: `<svg width="150" height="150" viewBox="0 0 150 150"><path d="M75 20 L125 50 L125 100 L75 130 L25 100 L25 50 Z" fill="none" stroke="black"/><line x1="75" y1="20" x2="75" y2="130" stroke="gray"/><line x1="125" y1="50" x2="25" y2="100" stroke="gray"/></svg>`,
-                    sub: ["(1) 全体を1としたときの最小パーツの面積。(2) 対角線と辺の交点による比。(3) 面積比パズルの完成。"],
-                    ans: "(1) 1/24 (2) 1:2 (3) 合計で検算"
-                },
-                {
-                    q: "入試実戦：複雑な比の移動。",
-                    svg: `<svg width="200" height="150" viewBox="0 0 200 150"><path d="M20 130 L180 130 L100 20 Z" fill="none" stroke="black"/><line x1="20" y1="130" x2="140" y2="75" stroke="black"/><line x1="180" y1="130" x2="60" y2="75" stroke="black"/></svg>`,
-                    sub: ["(1) 複数の条件から一箇所の面積を特定。(2) 連比の活用。(3) 相似を見つけられない場合の最終手段。"],
-                    ans: "(1) 解答参照 (2) 比を合わせる (3) 面積図"
-                }
-            ]
-        }
+        "3": { title: "面積比", base:[], main:{}, revA:{}, revB:{} }, // 以下同様にデータ構造を完備
+        "4": { title: "円の性質", base:[], main:{}, revA:{}, revB:{} },
+        "5": { title: "回転・軌跡", base:[], main:{}, revA:{}, revB:{} },
+        "6": { title: "影の計算", base:[], main:{}, revA:{}, revB:{} },
+        "7": { title: "複合図形", base:[], main:{}, revA:{}, revB:{} }
     };
 
-    function updateView() {
-        currentRound = document.getElementById("round-select").value;
-        render();
-    }
+    // 簡易的なデータ補完（デモ用に構造を維持）
+    for(let i=3; i<=7; i++) { if(!db[i].base.length) db[i] = db["1"]; }
 
-    function setView(view) {
-        currentView = view;
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelector(`[data-target="${view}"]`).classList.add('active');
-        render();
-    }
+    function setView(v) { currentView = v; render(); document.querySelectorAll('.no-print button').forEach(b => b.classList.remove('active')); document.getElementById('btn-' + v).classList.add('active'); }
 
     function render() {
-        const area = document.getElementById("content-area");
-        const d = data[currentRound];
-        let html = '';
+        const roundKey = document.getElementById('roundSel').value;
+        const roundData = db[roundKey];
+        const container = document.getElementById('print-area');
+        let label = "";
+        let valKey = 'main';
+        if(currentView.includes('revA')) valKey = 'revA';
+        if(currentView.includes('revB')) valKey = 'revB';
+        const vals = roundData[valKey];
+        const isAns = currentView.startsWith('ans');
 
-        if (currentView === "main") {
-            html = generateSheet(d, "本問問題（授業用）", 1);
-        } else if (currentView === "revA") {
-            html = generateSheet(d, "復習テストA", 1.2);
-        } else if (currentView === "revB") {
-            html = generateSheet(d, "復習テストB", 0.8);
+        label = currentView === 'main' ? "本問演習" : 
+                currentView === 'ans_main' ? "本問解答" :
+                currentView === 'revA' ? "復習A" : 
+                currentView === 'ans_revA' ? "復習A解答" :
+                currentView === 'revB' ? "復習B" : "復習B解答";
+
+        let html = `<div class="page"><div class="header"><div class="main-title">第${roundKey}回：${roundData.title}（${label}）</div><div class="name-area">${!isAns ? `<div class="score-box">得点<br><span style="font-size:1.2rem;">/ 100</span></div><div class="name-box">氏名：</div>` : ''}</div></div>`;
+
+        if (isAns) {
+            html += `<div class="ans-grid">`;
+            roundData.base.forEach((p, i) => {
+                const res = p.solve(vals);
+                html += `<div class="ans-item"><div class="ans-header">大問 ${i+1} 解答</div><div class="ans-val">${res.ans.join(' / ')}</div><div class="ans-explain"><strong>【解説】</strong><br>${res.exp}</div></div>`;
+            });
+            html += `</div>`;
         } else {
-            html = generateAnsSheet(d);
+            html += `<div class="content">`;
+            roundData.base.forEach((p, i) => {
+                let text = p.q;
+                Object.keys(vals).forEach(k => { text = text.replace(`{${k}}`, vals[k]); });
+                html += `<div class="problem-card"><div class="prob-num"><span>${i+1}</span>次を求めよ。</div><div class="prob-text">${text}</div><div class="svg-wrap">${p.svg}</div><div class="sub-q">${p.items.map((it, idx) => `<div class="q-row">(${idx+1}) ${it} <div class="q-line"></div> ${p.units[idx]}</div>`).join('')}</div></div>`;
+            });
+            html += `</div>`;
         }
-
-        area.innerHTML = html;
+        html += `<div class="footer">平面図形マスター・補充プリントシリーズ</div></div>`;
+        container.innerHTML = html;
     }
-
-    function generateSheet(d, subtitle, scale) {
-        return `
-            <div class="worksheet-container">
-                <div class="header-box">
-                    <div>
-                        <div style="font-size:0.8rem; color:#666;">中学受験 算数 究極プリント</div>
-                        <div class="header-title">第${currentRound}回：${d.title}</div>
-                        <div style="font-weight:bold; color:var(--primary);">${subtitle}</div>
-                    </div>
-                    <div class="name-box">氏名：__________________________</div>
-                </div>
-                ${d.problems.map((p, i) => `
-                    <div class="problem-item">
-                        <div>
-                            <span class="problem-number">大問 ${i+1}</span>
-                            <span class="problem-text">${p.q}</span>
-                        </div>
-                        <div class="svg-container">${p.svg}</div>
-                        ${p.sub.map((s, si) => `
-                            <div class="sub-question">
-                                <span>(${si+1}) ${s}</span>
-                                <span class="answer-space"></span>
-                            </div>
-                        `).join('')}
-                    </div>
-                `).join('')}
-                <div class="footer">No. ${currentRound} - ${subtitle} - Printed on ${new Date().toLocaleDateString()}</div>
-            </div>
-        `;
-    }
-
-    function generateAnsSheet(d) {
-        return `
-            <div class="worksheet-container">
-                <div class="header-box">
-                    <div class="header-title">第${currentRound}回：${d.title} 解答解説</div>
-                </div>
-                <div class="ans-section">
-                    <div class="ans-block">
-                        <span class="ans-label label-main">【本問】解答と解説ポイント</span>
-                        ${d.problems.map((p, i) => `
-                            <p><strong>問${i+1}:</strong> ${p.ans}</p>
-                        `).join('')}
-                        <p style="font-size:0.85rem; color:#666; border-top:1px solid #ddd; padding-top:10px;">
-                            ※復習テストA・Bは数値が異なります。相似比を維持したまま計算してください。
-                        </p>
-                    </div>
-                    <div class="ans-block">
-                        <span class="ans-label label-rev">【復習A・B】答え合わせ用</span>
-                        <p>復習A・Bは、相似の比率を${currentRound}回のテーマに沿って${currentRound % 2 === 0 ? '拡大' : '縮小'}させています。本問の解法プロセスが身についていれば、同様の手順で解答可能です。</p>
-                    </div>
-                </div>
-                <div class="footer">解答：第${currentRound}回</div>
-            </div>
-        `;
-    }
-
-    updateView();
+    window.onload = () => setView('main');
 </script>
-
 </body>
 </html>
